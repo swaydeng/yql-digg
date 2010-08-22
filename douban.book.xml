@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<table xlmns="http://query.yahooapis.com/v1/schema/table.xsd">
+  <meta>
+    <author>Sway Deng</author>
+    <documentationURL>		http://www.douban.com/service/apidoc/reference/subject#%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%B1%8D%E7%94%B5%E5%BD%B1%E9%9F%B3%E4%B9%90
+	</documentationURL>
+  </meta>
+  <bindings>
+   <select itemPath="rsp.douban.book" produces="XML">
+      <urls>
+        <url env="all">http://api.douban.com/book/subjects</url>
+      </urls>
+      <inputs>
+        <key id="q" type="xs:string" paramType="query" />
+        <key id="tag" type="xs:string" paramType="query" />
+        <key id="apikey" type="xs:string" const="true" private="true" paramType="query" default="0995b7113482fff31cc125339d88ffd9"/>
+      </inputs>
+    </select>
+  </bindings>
+</table>
