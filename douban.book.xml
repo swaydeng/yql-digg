@@ -4,10 +4,10 @@
         <author>Sway Deng</author>
         <description>Douban book table</description>
 		<documentationURL>http://www.douban.com</documentationURL>
-        <sampleQuery>SELECT * FROM {table} WHERE user='comboy'</sampleQuery>
+        <sampleQuery>SELECT * FROM {table} WHERE tag='comboy'</sampleQuery>
     </meta>
     <bindings>
-        <select itemPath="" produces="XML" >
+        <select itemPath="feed.entry" produces="XML" >
             <urls>
                 <url env="all">http://api.douban.com/book/subjects?tag={tag}</url>
             </urls>
