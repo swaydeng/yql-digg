@@ -3,13 +3,13 @@
     <meta>
         <author>Sway Deng</author>
         <description>Douban book table</description>
-		<documentationURL>http://www.blogbus.com</documentationURL>
+		<documentationURL>http://www.douban.com</documentationURL>
         <sampleQuery>SELECT * FROM {table} WHERE user='comboy'</sampleQuery>
     </meta>
     <bindings>
         <select itemPath="" produces="XML" >
             <urls>
-                <url env="all">http://api.douban.com/movie/subjects?tag={tag}</url>
+                <url env="all">http://api.douban.com/book/subjects?tag={tag}</url>
             </urls>
             <inputs>
                 <key id="tag" type="xs:string" paramType="path" required="true" />
