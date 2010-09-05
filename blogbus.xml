@@ -4,7 +4,7 @@
         <author>Sway Deng</author>
         <description>Blogbus blog</description>
 	<documentationURL>http://www.blogbus.com</documentationURL>
-        <sampleQuery>SELECT * FROM {table} WHERE user='nakedtechnologist'</sampleQuery>
+        <sampleQuery>SELECT * FROM {table} WHERE user='blueszhang'</sampleQuery>
     </meta>
     <bindings>
         <select itemPath="" produces="XML" >
