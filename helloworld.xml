@@ -14,7 +14,8 @@
       </inputs>
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
-          response.object = <item>var hello={a:"a"}</item>;
+		  var str = 'var hello={a:"a"}'
+          response.object = <item>str</item>;
       ]]></execute>
     </select>
   </bindings>
