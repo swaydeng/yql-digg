@@ -3,8 +3,8 @@
   <meta>
 	<author>Sway Deng</author>
     <documentationURL>http://swayweb.com</documentationURL>  
-    <description>The following Open Data Table allows you to see the status of a Alitalk user. </description>
-    <sampleQuery>select * from {table} where uids='swaydsw';</sampleQuery>
+    <description>The following Open Data Table allows you to see the status of Alitalk users. </description>
+    <sampleQuery>select * from {table} where uids='swaydsw;balibell';</sampleQuery>
   </meta>
   <bindings>
     <select itemPath="" produces="XML">
@@ -25,9 +25,8 @@
 			}
 		  }
 		  var uidsStr = ids.join(';');
-		  var url = request.url +  '\&uids=' + uidsStr;
 		  var myRequest = y.rest(url);
-	      var data = myRequest.get().response;
+	      var data = myRequest.query('uids',uidsStr).get().response;
           response.object = <info>
 								<request_url>{request.url}</request_url>
 								<url>{url}</url>
