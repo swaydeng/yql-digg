@@ -25,7 +25,7 @@
 			}
 		  }
 		  var uidsStr = ids.join(';');
-		  var myRequest = y.rest(url);
+		  var myRequest = y.rest(request.url);
 	      var data = myRequest.query('uids',uidsStr).get().response;
           response.object = <info>
 								<request_url>{request.url}</request_url>
