@@ -14,9 +14,7 @@
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
 		  rawStatus = request.get().response;
-		  var item = <item />
-		  item.str = rawStatus
-          response.object = item;
+          response.object = <str>{rawStatus}</str>;
       ]]></execute>
     </select>
   </bindings>
