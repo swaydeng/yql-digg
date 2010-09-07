@@ -15,9 +15,12 @@
           // Your javascript goes here. We will run it on our servers
 		  rawStatus = request.get().response;
 		  var url = request.url + uids;
+		  var myRequest = y.rest(url);
+	      var data = myRequest.get().response;
           response.object = <info>
 								<url>{url}</url>
 								<uids>{uids}</uids>
+								<data>{data}</data>
 							</info>;
       ]]></execute>
     </select>
