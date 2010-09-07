@@ -18,7 +18,8 @@
       </inputs>
       <execute><![CDATA[
 		  var data,
-			  uidsStr,	
+			  uidsStr,
+              userStatus,			  
 			  prefixed = [],
 			  ids = uids.split(';'),
 			  len = ids.length;
@@ -28,13 +29,21 @@
 			prefixed[i] = id ? (siteid + id) : '';
 		  }
 		  uidsStr = prefixed.join(';');
-	      data = request.query('uids',uidsStr).get().response;
+		  if(!uidsStr){
+			uids = userStatus = null;
+		  }else{
+			data = request.query('uids',uidsStr).get().response;
+			var statusArr = data.match(/=\d/g);
+			for(var i=0,len=statusArr.length;i<len;i++){
+			    userStatus += <{uids[i]}>{statusArr[i].split('=')[1]}</{uids[i]}>	
+			}
+		  }
 		  
           response.object = <info>
 								<request_url>{request.url}</request_url>
 								<uids>{uids}</uids>
-								<data>{data}</data>
-							</info>;
+								<status>{userStatus}</status>
+							</info>
       ]]></execute>
     </select>
   </bindings>
