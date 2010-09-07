@@ -19,7 +19,7 @@
       <execute><![CDATA[
 		  var data,
 			  uidsStr,
-              userStatus,			  
+              userStatus = '',			  
 			  prefixed = [],
 			  ids = uids.split(';'),
 			  len = ids.length;
