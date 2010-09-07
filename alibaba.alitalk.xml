@@ -17,15 +17,19 @@
         <key id='uids' type='xs:string' paramType='variable' required="true" />
       </inputs>
       <execute><![CDATA[
-		  var ids = uids.split(';');
-		  for(var i=0,len=ids.length; i<len; i++){
+		  var data,
+			  uidsStr,	
+			  prefixed = [],
+			  ids = uids.split(';'),
+			  len = ids.length;
+			  
+		  for(var i=0; i<len; i++){
 			var id = ids[i];
-			if(id){
-				ids[i] = siteid + id;
-			}
+			prefixed[i] = id ? (siteid + id) : '';
 		  }
-		  var uidsStr = ids.join(';');
-	      var data = request.query('uids',uidsStr).get().response;
+		  uidsStr = prefixed.join(';');
+	      data = request.query('uids',uidsStr).get().response;
+		  
           response.object = <info>
 								<request_url>{request.url}</request_url>
 								<uids>{uids}</uids>
