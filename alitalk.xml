@@ -14,8 +14,9 @@
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
 		  rawStatus = request.get().response;
+		  var url = request.url + uids;
           response.object = <info>
-								<url>{request.url}</url>
+								<url>{url}</url>
 								<uids>{uids}</uids>
 							</info>;
       ]]></execute>
