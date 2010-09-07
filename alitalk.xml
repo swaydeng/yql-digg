@@ -11,6 +11,13 @@
       <inputs>
         <key id='uids' type='xs:string' paramType='variable' required="true" />
       </inputs>
+      <execute><![CDATA[
+          // Your javascript goes here. We will run it on our servers
+		  rawStatus = request.get().response;
+		  var item = <item />
+		  item.str = rawStatus
+          response.object = item;
+      ]]></execute>
     </select>
   </bindings>
 </table>
