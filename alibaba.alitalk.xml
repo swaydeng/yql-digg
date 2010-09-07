@@ -17,8 +17,7 @@
         <key id='uids' type='xs:string' paramType='variable' required="true" />
       </inputs>
       <execute><![CDATA[
-		  var data,
-			  uidsStr,
+		  var data, uidsStr,
               statuses = new XML(),			  
 			  prefixed = [],
 			  ids = uids.split(';'),
@@ -29,18 +28,17 @@
 			prefixed[i] = id ? (siteid + id) : '';
 		  }
 		  uidsStr = prefixed.join(';');
-		  if(!uidsStr){
-			uids = statuses = null;
-		  }else{
+		  if(uidsStr){
 			data = request.query('uids',uidsStr).get().response;
 			var statusArr = data.match(/=\d/g);
 			for(var i=0,len=statusArr.length;i<len;i++){
 				var userName = ids[i],
 					userStatus = statusArr[i].split('=')[1];
 				if(userName && userStatus)	
-					statuses += <{ids[i]}>{statusArr[i].split('=')[1]}</{ids[i]}>;				
-				else continue;	
-			}
+					statuses += <{ids[i]}>{statusArr[i].split('=')[1]}</{ids[i]}>;
+			}			
+		  }else{
+			uids = statuses = null;
 		  }
 		  
           response.object = <info>
