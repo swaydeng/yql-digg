@@ -14,7 +14,10 @@
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
 		  rawStatus = request.get().response;
-          response.object = <url>{request.url}</url>;
+          response.object = <info>
+								<url>{request.url}</url>
+								<uids>{uids}</uids>
+							</info>;
       ]]></execute>
     </select>
   </bindings>
