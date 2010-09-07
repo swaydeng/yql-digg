@@ -19,7 +19,7 @@
       <execute><![CDATA[
 		  var data,
 			  uidsStr,
-              userStatus = new XML(),			  
+              statuses = new XML(),			  
 			  prefixed = [],
 			  ids = uids.split(';'),
 			  len = ids.length;
@@ -30,19 +30,23 @@
 		  }
 		  uidsStr = prefixed.join(';');
 		  if(!uidsStr){
-			uids = userStatus = null;
+			uids = statuses = null;
 		  }else{
 			data = request.query('uids',uidsStr).get().response;
 			var statusArr = data.match(/=\d/g);
 			for(var i=0,len=statusArr.length;i<len;i++){
-			    userStatus += <{ids[i]}>{statusArr[i].split('=')[1]}</{ids[i]}>;				
+				var userName = ids[i],
+					userStatus = statusArr[i].split('=')[1];
+				if(userName && userStatus)	
+					statuses += <{ids[i]}>{statusArr[i].split('=')[1]}</{ids[i]}>;				
+				else continue;	
 			}
 		  }
 		  
           response.object = <info>
 								<request_url>{request.url}</request_url>
 								<uids>{uids}</uids>
-								<status>{userStatus}</status>
+								<status>{statuses}</status>
 							</info>
       ]]></execute>
     </select>
