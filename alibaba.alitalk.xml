@@ -35,9 +35,7 @@
 			data = request.query('uids',uidsStr).get().response;
 			var statusArr = data.match(/=\d/g);
 			for(var i=0,len=statusArr.length;i<len;i++){
-				var user = <{uids[i]} />;
-				user.@['value'] = statusArr[i].split('=')[1];
-			    userStatus += user;	
+			    userStatus += ('<' + uids[i] +'>' + statusArr[i].split('=')[1] +'</' + uids[i] +'>');	
 			}
 		  }
 		  
