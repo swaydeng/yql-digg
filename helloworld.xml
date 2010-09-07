@@ -15,7 +15,9 @@
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
 		  var str = 'var hello={a:"a"}'
-          response.object = <item>str</item>;
+		  var item = <item />
+		  item.str = str
+          response.object = item;
       ]]></execute>
     </select>
   </bindings>
