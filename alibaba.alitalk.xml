@@ -29,7 +29,7 @@
 	      var data = myRequest.query('uids',uidsStr).get().response;
           response.object = <info>
 								<request_url>{request.url}</request_url>
-								<url>{url}</url>
+								<url>'haha'</url>
 								<uids>{uids}</uids>
 								<data>{data}</data>
 							</info>;
