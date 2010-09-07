@@ -13,7 +13,7 @@
       </urls>
       <inputs>
         <key id='beginnum' type='xs:string' paramType='path' default="0" />
-        <key id='siteID' type='xs:string' paramType='variable' default="cnalichn" />
+        <key id='siteid' type='xs:string' paramType='variable' default="cnalichn" />
         <key id='uids' type='xs:string' paramType='variable' required="true" />
       </inputs>
       <execute><![CDATA[
@@ -21,7 +21,7 @@
 		  for(var i=0,len=ids.length; i<len; i++){
 			var id = ids[i];
 			if(id){
-				ids[i] = siteId + id;
+				ids[i] = siteid + id;
 			}
 		  }
 		  var uidsStr = ids.join(';');
