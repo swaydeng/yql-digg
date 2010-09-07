@@ -12,7 +12,7 @@
         <url>http://amos.im.alisoft.com/muliuserstatus.aw?uids={uids}</url>
       </urls>
       <inputs>
-        <key id='uids' type='xs:string' paramType='variable' required="true" />
+        <key id='uids' type='xs:string' paramType='path' required="true" />
       </inputs>
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
