@@ -25,7 +25,7 @@
 			}
 		  }
 		  var uidsStr = ids.join(';');
-		  var url = request.url +  '&uids' + uidsStr;
+		  var url = request.url +  '\&uids=' + uidsStr;
 		  var myRequest = y.rest(url);
 	      var data = myRequest.get().response;
           response.object = <info>
