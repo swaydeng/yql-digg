@@ -2,7 +2,7 @@
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">  
   <meta>  
     <author>Sway Deng</author>
-    <documentationURL>http://www.douban.com/service/apidoc/reference/subject#%E6%90%9C%E7%B4%A2%E4%B9%A6%E7%B1%8D%E7%94%B5%E5%BD%B1%E9%9F%B3%E4%B9%90
+    <documentationURL>http://www.douban.com/service/apidoc/reference/subject#搜索书籍电影音乐
 	</documentationURL>  
     <sampleQuery>select * from {table} where tag="Jane Austen"</sampleQuery>  
   </meta>  
