@@ -14,11 +14,7 @@
       </inputs>
       <execute><![CDATA[
           // Your javascript goes here. We will run it on our servers
-          response.object = <item>
-                   <url>{request.url}</url>
-                   <a>{a}</a>
-                   <b>{b}</b>
-                </item>;
+          response.object = <item>var hello={a:"a"}</item>;
       ]]></execute>
     </select>
   </bindings>

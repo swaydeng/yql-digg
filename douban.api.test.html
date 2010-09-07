@@ -26,7 +26,7 @@ function failureCb(){
 function makeRequest(){
 	var queryUrl = DB.baseUrl 
 					+ 'book/subjects?alt=xd&apikey=' 
-					+ DB.apikey + '&q=真理部&tag=奥威尔&start-index=1&max-results=5&callback=callback';
+					+ DB.apikey + '&tag=奥威尔&start-index=1&max-results=5&callback=callback';
 	alert(queryUrl);
 	YAHOO.util.Get.script(queryUrl, {onFailure:failureCb,onTimeout:failureCb,timeout: 5000});
 }
