@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+  <meta>
+	<author>Sway Deng</author>
+    <documentationURL>http://swayweb.com</documentationURL>  
+    <description>test open search. </description>
+    <sampleQuery>select * from {table} where keywords='mp3';</sampleQuery>
+  </meta>
+  <bindings>
+    <select itemPath="" produces="XML">
+      <urls>
+        <url>http://service.search.china.alibaba.com/search/json_viewer.htm</url>
+      </urls>
+      <inputs>
+        <key id='keywords' type='xs:string' paramType='query' required="true" />
+        <key id='search_type' type='xs:string' paramType='query' default="offer" />
+      </inputs>      
+    </select>
+  </bindings>
+</table>
