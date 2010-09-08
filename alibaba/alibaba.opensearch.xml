@@ -14,7 +14,11 @@
       <inputs>
         <key id='keywords' type='xs:string' paramType='query' required="true" />
         <key id='search_type' type='xs:string' paramType='query' default="offer" />
-      </inputs>      
+      </inputs>
+		<execute><![CDATA[
+				  				  
+			response.object = request.get().response
+      ]]></execute>      
     </select>
   </bindings>
 </table>
