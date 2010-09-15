@@ -21,9 +21,6 @@
 			<execute><![CDATA[
 			
 			y.include( "http://github.com/yql/yql-tables/raw/master/oauth/oauth.utils.js" );
-			
-			//http://github.com/kvz/phpjs/raw/master/functions/url/parse_url.js
-			y.include( 'store://O5Xv7RpWAXsyE9TqBe4NCk' );
 			 
 			var parsed = parse_url( uri );
 			var accessor = {
