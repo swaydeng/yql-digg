@@ -44,7 +44,7 @@
 			var args = {
 				method: method,
 				accessor: accessor,
-				parameters:[{content:content}]
+				parameters:[[ "content", content ]]
 			};
 			
 			if ( callbackUri ) {
