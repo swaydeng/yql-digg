@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
   <meta>
-    <sampleQuery>insert into {table} (content, oauth_token, oauth_token_secret) VALUES ('hello,douban!', 'your_access_token', 'your_access_token_secret')</sampleQuery>
+	 <author>Sway Deng</author>
+	 <documentationURL>http://swayweb.com</documentationURL>
+    <sampleQuery>INSERT INTO {table} (content, oauth_token, oauth_token_secret) VALUES ('hello,douban!', 'your_access_token', 'your_access_token_secret')</sampleQuery>
   </meta>
   <bindings>
   <insert itemPath="content" produces="XML">
@@ -18,96 +20,7 @@
 y.include("http://oauth.googlecode.com/svn/code/javascript/oauth.js");
 y.include("http://oauth.googlecode.com/svn/code/javascript/sha1.js");
 
-function sendRequest(args)
-{
-   switch(args.method) {
-   	 case 'POST': 
-       return postRequest(args);
-     case 'PUT':
-       return putRequest(args);
-     case 'DELETE':
-       return deleteRequest(args);
-     case 'GET':
-     default:
-       return getRequest(args);
-   }
-   return null;
-}
-
-function getRequest(args)
-{
-   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
-
-   var rsp = null;
-   try {
-      if(auth) request.header('Authorization', auth.header);
-      rsp = request.get().response;
-   } catch(err) {
-      rsp = {'result':'failure', 'error': err};
-   }
-   return rsp;
-}
-
-function postRequest(args)
-{
-   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
-   var data = oAuthBuildContent(auth.message.parameters);
-        
-   var rsp = null;
-   try {
-      //if(auth) request.header('Authorization', auth.header);
-      request.header('Content-Type', 'application/x-www-form-urlencoded');
-      rsp = request.post( data ).response;
-   } catch(err) {
-      rsp = {'result':'failure', 'error': err};
-   }
-   return rsp;
-}
-
-function putRequest(args)
-{
-   var data = oAuthBuildContent(args.parameters);
-   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
-
-   var rsp = null;
-   try {
-      if(auth) request.header('Authorization', auth.header);
-      rsp = request.put( data ).response;
-   } catch(err) {
-      rsp = {'result':'failure', 'error': err};
-   }
-   return rsp;
-}
-
-function deleteRequest(args)
-{
-   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
-   
-   var rsp = null;
-   try {
-      if(auth) request.header('Authorization', auth.header);
-      rsp = request.del().response;
-   } catch(err) {
-      rsp = {'result':'failure', 'error': err};
-   }
-   return rsp;
-}
-
-function oAuthBuildContent(content) 
-{
-   var components = [];
-   for(var i=0, count=content.length; i<count; i++) {
-      var item = content[i];
-      var key = item[0];
-      var value = encodeURIComponent(item[1]);
-      
-      components.push(key+'='+value);
-   }
-   return components.join('&');
-}
-
-function oAuthSignRequest(args)
-{
+function oAuthSignRequest(args){
    var accessor = args.accessor;
    
    var message = {};
@@ -136,9 +49,7 @@ function oAuthSignRequest(args)
    return auth;
 }
 
-/********************************/
-function myPostRequest(args)
-{
+function postRequest(args){
    var auth = (args.accessor) ? oAuthSignRequest(args) : null;
    var data = '<entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>' + content + '</content></entry>';
         
@@ -146,7 +57,7 @@ function myPostRequest(args)
    try {
       if(auth) request.header('Authorization', auth.header);
       request.header('Content-Type', 'application/atom+xml');
-      rsp = request.post( data ).response;
+      rsp = request.post(data).status; //request.post( data ).response
    } catch(err) {
       rsp = {'result':'failure', 'error': err};
    }
@@ -160,12 +71,11 @@ accessor.realm = request.url;
 accessor.token = oauth_token;
 accessor.tokenSecret = oauth_token_secret;
 
-var parameters = [];
-response.object = myPostRequest({
+response.object = postRequest({
    action: request.url,
    method: "POST",
    accessor: accessor,
-   parameters: parameters
+   parameters: []
 });
 				]]>
 			</execute>
