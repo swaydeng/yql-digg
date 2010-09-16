@@ -145,7 +145,7 @@ function myPostRequest(args)
    var rsp = null;
    try {
       if(auth) request.header('Authorization', auth.header);
-      request.header('Content-Type', 'application/application/atom+xml');
+      request.header('Content-Type', 'application/atom+xml');
       rsp = request.post( data ).response;
    } catch(err) {
       rsp = {'result':'failure', 'error': err};
