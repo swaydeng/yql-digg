@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
   <meta>
-    <sampleQuery>insert into xxx;</sampleQuery>
+    <sampleQuery>insert into {table} (content, oauth_token, oauth_token_secret) VALUES ('hello,douban!', 'your_access_token', 'your_access_token_secret')</sampleQuery>
   </meta>
   <bindings>
   <insert itemPath="content" produces="XML">
@@ -140,7 +140,7 @@ function oAuthSignRequest(args)
 function myPostRequest(args)
 {
    var auth = (args.accessor) ? oAuthSignRequest(args) : null;
-   var data = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>' + content + '</content></entry>';
+   var data = '<entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>' + content + '</content></entry>';
         
    var rsp = null;
    try {
