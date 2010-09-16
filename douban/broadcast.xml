@@ -4,18 +4,154 @@
     <sampleQuery>insert into xxx;</sampleQuery>
   </meta>
   <bindings>
-  <insert itemPath="entry" produces="XML">
+  <insert itemPath="content" produces="XML">
 			<urls>
 				<url>http://api.douban.com/miniblog/saying</url>
 			</urls>
 			<inputs>
-				<key id="entry" type="xs:string" paramType="variable" required="true"/>
+				<key id="content" type="xs:string" paramType="variable" required="true"/>
 				<key id="oauth_token" type="xs:string" paramType="variable" required="true"/>
 				<key id="oauth_token_secret" type="xs:string" paramType="variable" required="true"/>
 			</inputs>
 			<execute>
 				<![CDATA[
-y.include("http://www.datatables.org/oauth/oauth.utils.js");
+y.include("http://oauth.googlecode.com/svn/code/javascript/oauth.js");
+y.include("http://oauth.googlecode.com/svn/code/javascript/sha1.js");
+
+function sendRequest(args)
+{
+   switch(args.method) {
+   	 case 'POST': 
+       return postRequest(args);
+     case 'PUT':
+       return putRequest(args);
+     case 'DELETE':
+       return deleteRequest(args);
+     case 'GET':
+     default:
+       return getRequest(args);
+   }
+   return null;
+}
+
+function getRequest(args)
+{
+   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
+
+   var rsp = null;
+   try {
+      if(auth) request.header('Authorization', auth.header);
+      rsp = request.get().response;
+   } catch(err) {
+      rsp = {'result':'failure', 'error': err};
+   }
+   return rsp;
+}
+
+function postRequest(args)
+{
+   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
+   var data = oAuthBuildContent(auth.message.parameters);
+        
+   var rsp = null;
+   try {
+      //if(auth) request.header('Authorization', auth.header);
+      request.header('Content-Type', 'application/x-www-form-urlencoded');
+      rsp = request.post( data ).response;
+   } catch(err) {
+      rsp = {'result':'failure', 'error': err};
+   }
+   return rsp;
+}
+
+function putRequest(args)
+{
+   var data = oAuthBuildContent(args.parameters);
+   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
+
+   var rsp = null;
+   try {
+      if(auth) request.header('Authorization', auth.header);
+      rsp = request.put( data ).response;
+   } catch(err) {
+      rsp = {'result':'failure', 'error': err};
+   }
+   return rsp;
+}
+
+function deleteRequest(args)
+{
+   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
+   
+   var rsp = null;
+   try {
+      if(auth) request.header('Authorization', auth.header);
+      rsp = request.del().response;
+   } catch(err) {
+      rsp = {'result':'failure', 'error': err};
+   }
+   return rsp;
+}
+
+function oAuthBuildContent(content) 
+{
+   var components = [];
+   for(var i=0, count=content.length; i<count; i++) {
+      var item = content[i];
+      var key = item[0];
+      var value = encodeURIComponent(item[1]);
+      
+      components.push(key+'='+value);
+   }
+   return components.join('&');
+}
+
+function oAuthSignRequest(args)
+{
+   var accessor = args.accessor;
+   
+   var message = {};
+   message.action = args.action || request.url;
+   message.method = args.method || 'GET';
+   message.parameters = args.parameters || null;
+   
+   OAuth.setTimestampAndNonce(message);
+   OAuth.setParameter(message, "oauth_consumer_key", accessor.consumerKey);
+   OAuth.setParameter(message, "oauth_version", '1.0');
+
+   if(accessor.token) {
+      OAuth.setParameter(message, "oauth_token", accessor.token);
+   }
+
+   OAuth.SignatureMethod.sign(message, accessor);
+   
+   var realm = accessor.realm || '';
+   var header = OAuth.getAuthorizationHeader(realm, message.parameters);
+   var auth = {message:message, accessor:accessor, header:header};
+   
+   if(args.debug==true) {
+      y.log(auth);
+   }
+   
+   return auth;
+}
+
+/********************************/
+function myPostRequest(args)
+{
+   var auth = (args.accessor) ? oAuthSignRequest(args) : null;
+   var data = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns:ns0="http://www.w3.org/2005/Atom" xmlns:db="http://www.douban.com/xmlns/"><content>' + content + '</content></entry>';
+        
+   var rsp = null;
+   try {
+      if(auth) request.header('Authorization', auth.header);
+      request.header('Content-Type', 'application/application/atom+xml');
+      rsp = request.post( data ).response;
+   } catch(err) {
+      rsp = {'result':'failure', 'error': err};
+   }
+   return rsp;
+}
 
 var accessor = {};
 accessor.consumerKey = "0995b7113482fff31cc125339d88ffd9";
@@ -25,9 +161,7 @@ accessor.token = oauth_token;
 accessor.tokenSecret = oauth_token_secret;
 
 var parameters = [];
-parameters.push(["entry",entry]);
-
-response.object = sendRequest({
+response.object = myPostRequest({
    action: request.url,
    method: "POST",
    accessor: accessor,
