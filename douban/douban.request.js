@@ -40,7 +40,7 @@ function postRequest(args){
    try {
       if(auth) request.header('Authorization', auth.header);
       request.header('Content-Type', 'application/atom+xml');
-      rsp = request.post(data).response;
+      rsp = request.post(data).status;
    } catch(err) {
       rsp = {'result':'failure', 'error': err};
    }
@@ -56,7 +56,7 @@ function putRequest(args){
    try {
       if(auth) request.header('Authorization', auth.header);
 	  request.header('Content-Type', 'application/atom+xml');
-      rsp = request.put(data).response;
+      rsp = request.put(data).status;
    } catch(err) {
       rsp = {'result':'failure', 'error': err};
    }
@@ -67,10 +67,10 @@ function deleteRequest(args){
    var auth = (args.accessor) ? oAuthSignRequest(args) : null;
    
    var rsp = null;
-   try {
+   try{
       if(auth) request.header('Authorization', auth.header);
-      rsp = request.del().response;
-   } catch(err) {
+      rsp = request.del().status;
+   }catch(err){
       rsp = {'result':'failure', 'error': err};
    }
    return rsp;

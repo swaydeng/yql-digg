@@ -15,8 +15,12 @@ var api_key = '0995b7113482fff31cc125339d88ffd9',
 	oauth_consumer_secret = api_secret;
 
 YUI().use('node', 'yql', function(Y) {
-    var accessToken = localStorage.getItem('douban_access_token'),	
-		accessTokenSecret = localStorage.getItem('douban_access_token_secret'); 	
+    var doubanUserId = localStorage.getItem('douban_user_id'),
+		accessToken = localStorage.getItem('douban_access_token'),	
+		accessTokenSecret = localStorage.getItem('douban_access_token_secret');
+	if(accessToken && accessTokenSecret){
+		
+	}
 });
 </script>
 </body>
