@@ -6,7 +6,7 @@
     <sampleQuery>SELECT * FROM {table} WHERE ...</sampleQuery>
   </meta>
   <bindings>
-  <insert itemPath="content" produces="XML">
+  <select itemPath="content" produces="XML">
 			<urls>
 				<url>http://api.douban.com/miniblog/saying</url>
 			</urls>
@@ -49,6 +49,6 @@
 			response.object = sendRequest(args);
 				]]>
 			</execute>
-		</insert>
+		</select>
   </bindings>
 </table>

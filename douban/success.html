@@ -58,6 +58,8 @@ YUI().use('node', 'yql', function(Y) {
 				localStorage.setItem('douban_user_id',doubanUserId);	
 				localStorage.setItem('douban_access_token',accessToken);	
 				localStorage.setItem('douban_access_token_secret',accessTokenSecret);
+				localStorage.removeItem('douban_req_token');
+				localStorage.removeItem('douban_req_token_secret');
 				location.href = "http://swayweb.com/labs/douban/index.html";
 			}
 		});
