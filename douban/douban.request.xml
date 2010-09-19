@@ -13,7 +13,7 @@
 			<inputs>
 				<key id="method" type="xs:string" paramType="variable" default="GET"/>
 				<key id="uri" type="xs:string" paramType="variable" required="true"/>
-				<key id="resource" type="xs:string" paramType="variable" required="true"/>
+				<key id="resource" type="xs:string" paramType="variable" />
 				<key id="consumer_key" type="xs:string" paramType="variable" required="true"/>
 				<key id="consumer_secret" type="xs:string" paramType="variable" required="true"/>
 				<key id="access_token" type="xs:string" paramType="variable" required="true"/>
